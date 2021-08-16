@@ -13,10 +13,6 @@ namespace LiveNationWebAPI.Model
     }
     public class APIService: IAPIService
     {
-        public APIService()
-        {
-
-        }
         public string CreateRangeResponse(Range range)
         {
             if (range.IsValidRange())
