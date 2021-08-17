@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LiveNationWebAPI.Model
 {
@@ -50,12 +47,15 @@ namespace LiveNationWebAPI.Model
             string key = rule.Key;
             string value = rule.Value;
 
-            ReadRulesFromFile();
-            if (_rules.ContainsKey(key))
-                _rules[key] = value;
-            else
-                _rules.Add(key, value);
-            SaveRulesToFile();
+            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+            {
+                ReadRulesFromFile();
+                if (_rules.ContainsKey(key))
+                    _rules[key] = value;
+                else
+                    _rules.Add(key, value);
+                SaveRulesToFile();
+            }
         }
 
         public void DeleteRule(Rule rule)
@@ -64,8 +64,10 @@ namespace LiveNationWebAPI.Model
 
             ReadRulesFromFile();
             if (_rules.ContainsKey(key))
+            {
                 _rules.Remove(key);
-            SaveRulesToFile();
+                SaveRulesToFile();
+            }
         }
     }
 }

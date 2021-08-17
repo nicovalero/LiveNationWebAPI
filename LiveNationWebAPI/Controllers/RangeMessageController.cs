@@ -1,7 +1,6 @@
 ﻿using LiveNationWebAPI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace LiveNationWebAPI.Controllers
 {
