@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace LiveNationWebAPI.Model
 {
-    public class Range
+    public interface IRange
+    {
+        public bool IsValidRange();
+        public List<int> GetSequence();
+    }
+    public class Range : IRange
     {
         private string _start;
         private string _end;

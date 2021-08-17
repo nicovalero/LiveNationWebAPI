@@ -20,6 +20,7 @@ namespace LiveNationWebAPI.Controllers
         {
             Range range = new Range(start, end);
             Response response = new Response();
+
             response.Result = _APIService.CreateRangeResponse(range);
             response.Summary = _APIService.GetRuleSummary();
             string json = JsonConvert.SerializeObject(response);

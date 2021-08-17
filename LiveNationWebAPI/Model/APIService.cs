@@ -9,7 +9,7 @@ namespace LiveNationWebAPI.Model
 {
     public interface IAPIService
     {
-        public string CreateRangeResponse(Range range);
+        public string CreateRangeResponse(IRange range);
         public Dictionary<string, string> GetRuleSummary();
         public void SetRule(Rule rule);
         public void DeleteRule(Rule rule);
@@ -22,7 +22,7 @@ namespace LiveNationWebAPI.Model
         {
             _ruleManager = ruleManager;
         }
-        public string CreateRangeResponse(Range range)
+        public string CreateRangeResponse(IRange range)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace LiveNationWebAPI.Model
 
                     if (sequence != null)
                     {
-                        StringBuilder result = new StringBuilder();
+                        List<string> alteredSequence = new List<string>();
                         StringBuilder currentResult;
                         Dictionary<string, string> rules = _ruleManager.GetRules();
                         List<string> ruleKeys = rules.Keys.ToList();
@@ -51,11 +51,12 @@ namespace LiveNationWebAPI.Model
                             if (currentResult.Length == 0)
                                 currentResult.Append(number.ToString());
 
-                            result.Append(currentResult);
-                            result.Append(" ");
+                            alteredSequence.Add(currentResult.ToString());
                         }
 
-                        return result.ToString();
+                        string result = string.Join(" ", alteredSequence);
+
+                        return result;
                     }
                     else
                         return null;
@@ -72,7 +73,8 @@ namespace LiveNationWebAPI.Model
         public Dictionary<string, string> GetRuleSummary()
         {
             Dictionary<string, string> dictionary = _ruleManager.GetRules();
-            dictionary = DictionaryReversion.Reverse<string, string>(dictionary);
+            if(dictionary != null)
+                dictionary = DictionaryReversion.Reverse<string, string>(dictionary);
             return dictionary;
         }
 
