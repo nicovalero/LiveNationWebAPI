@@ -11,9 +11,12 @@ namespace LiveNationWebAPI.Model
     {
         public static Dictionary<string,string> DeserializeRules(string json)
         {
-            Dictionary<string,string> list = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+        }
 
-            return list;
+        public static string SerializeRules(Dictionary<string,string> rules)
+        {
+            return JsonConvert.SerializeObject(rules);
         }
     }
 }

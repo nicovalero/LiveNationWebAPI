@@ -14,7 +14,7 @@ namespace LiveNationWebAPI.Controllers
         {
             _APIService = service;
         }
-        [HttpGet]
+        [HttpGet("GetRangeResponse")]
         public string GetRangeResponse(string start, string end)
         {
             Range range = new Range(start, end);
@@ -24,6 +24,18 @@ namespace LiveNationWebAPI.Controllers
             string json = JsonConvert.SerializeObject(response);
 
             return json;
+        }
+
+        [HttpPost("SaveRule")]
+        public void SetRule(string key, string value)
+        {
+            _APIService.SetRule(key, value);
+        }
+
+        [HttpPost("DeleteRule")]
+        public void DeleteRule(string key)
+        {
+            _APIService.DeleteRule(key);
         }
     }
 }

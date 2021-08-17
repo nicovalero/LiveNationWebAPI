@@ -11,6 +11,8 @@ namespace LiveNationWebAPI.Model
     {
         public string CreateRangeResponse(Range range);
         public Dictionary<string, string> GetRuleSummary();
+        public void SetRule(string key, string value);
+        public void DeleteRule(string key);
     }
     public class APIService: IAPIService
     {
@@ -63,6 +65,16 @@ namespace LiveNationWebAPI.Model
         public Dictionary<string, string> GetRuleSummary()
         {
             return _ruleManager.GetRules();
+        }
+
+        public void SetRule(string key, string value)
+        {
+            _ruleManager.SaveRule(key, value);
+        }
+
+        public void DeleteRule(string key)
+        {
+            _ruleManager.DeleteRule(key);
         }
     }
 }

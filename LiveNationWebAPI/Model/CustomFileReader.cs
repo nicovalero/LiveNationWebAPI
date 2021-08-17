@@ -9,11 +9,11 @@ namespace LiveNationWebAPI.Model
 {
     public static class CustomFileReader
     {
-        public static string ReadFile(Uri location)
+        public static string ReadFile(Uri locationUri)
         {
             try
             {
-                string localPath = location.LocalPath;
+                string localPath = locationUri.LocalPath;
                 if (File.Exists(localPath))
                 {
                     string content = "";
@@ -34,6 +34,29 @@ namespace LiveNationWebAPI.Model
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public static bool WriteToFile(Uri locationUri, string json)
+        {
+            try
+            {
+                string localPath = locationUri.LocalPath;
+                if (File.Exists(localPath))
+                {
+                    using (var writer = new StreamWriter(localPath))
+                    {
+                        writer.Write(json);
+                    }
+
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }
