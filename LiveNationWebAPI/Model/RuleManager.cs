@@ -9,16 +9,20 @@ namespace LiveNationWebAPI.Model
 {
     public interface IRuleManager
     {
-        public Dictionary<string, string> _rules { get; set; }
         public void ReadRulesFromFile();
         public void SaveRulesToFile();
         public Dictionary<string, string> GetRules();
-        public void SaveRule(string key, string value);
-        public void DeleteRule(string key);
+        public void SaveRule(Rule rule);
+        public void DeleteRule(Rule rule);
     }
     public class RuleManager: IRuleManager
     {
-        public Dictionary<string, string> _rules { get; set; }
+        private Dictionary<string, string> _rules;
+        public Dictionary<string,string> Rules
+        {
+            get { return _rules; }
+            set { _rules = value; }
+        }
         private readonly string RULESPATH = "Config/Rules.json";
 
         public void ReadRulesFromFile()
@@ -41,8 +45,11 @@ namespace LiveNationWebAPI.Model
             return _rules;
         }
 
-        public void SaveRule(string key, string value)
+        public void SaveRule(Rule rule)
         {
+            string key = rule.Key;
+            string value = rule.Value;
+
             ReadRulesFromFile();
             if (_rules.ContainsKey(key))
                 _rules[key] = value;
@@ -51,8 +58,10 @@ namespace LiveNationWebAPI.Model
             SaveRulesToFile();
         }
 
-        public void DeleteRule(string key)
+        public void DeleteRule(Rule rule)
         {
+            string key = rule.Key;
+
             ReadRulesFromFile();
             if (_rules.ContainsKey(key))
                 _rules.Remove(key);

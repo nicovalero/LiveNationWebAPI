@@ -11,8 +11,8 @@ namespace LiveNationWebAPI.Model
     {
         public string CreateRangeResponse(Range range);
         public Dictionary<string, string> GetRuleSummary();
-        public void SetRule(string key, string value);
-        public void DeleteRule(string key);
+        public void SetRule(Rule rule);
+        public void DeleteRule(Rule rule);
     }
     public class APIService: IAPIService
     {
@@ -24,57 +24,66 @@ namespace LiveNationWebAPI.Model
         }
         public string CreateRangeResponse(Range range)
         {
-            if (range.IsValidRange())
+            try
             {
-                List<int> sequence = range.GetSequence();
-
-                if (sequence != null)
+                if (range.IsValidRange())
                 {
-                    StringBuilder result = new StringBuilder();
-                    StringBuilder currentResult;
-                    Dictionary<string, string> rules = _ruleManager.GetRules();
-                    List<string> ruleKeys = rules.Keys.ToList();
-                    int keyInteger;
+                    List<int> sequence = range.GetSequence();
 
-                    foreach (int number in sequence)
+                    if (sequence != null)
                     {
-                        currentResult = new StringBuilder();
+                        StringBuilder result = new StringBuilder();
+                        StringBuilder currentResult;
+                        Dictionary<string, string> rules = _ruleManager.GetRules();
+                        List<string> ruleKeys = rules.Keys.ToList();
+                        int keyInteger;
 
-                        foreach (string key in ruleKeys)
+                        foreach (int number in sequence)
                         {
-                            keyInteger = Convert.ToInt32(key);
-                            if (number % keyInteger == 0)
-                                currentResult.Append(rules[key]);
+                            currentResult = new StringBuilder();
+
+                            foreach (string key in ruleKeys)
+                            {
+                                keyInteger = Convert.ToInt32(key);
+                                if (number % keyInteger == 0)
+                                    currentResult.Append(rules[key]);
+                            }
+                            if (currentResult.Length == 0)
+                                currentResult.Append(number.ToString());
+
+                            result.Append(currentResult);
+                            result.Append(" ");
                         }
-                        if (currentResult.Length == 0)
-                            currentResult.Append(number.ToString());
 
-                        result.Append(currentResult);
-                        result.Append(" ");
+                        return result.ToString();
                     }
-
-                    return result.ToString();
+                    else
+                        return null;
                 }
                 else
                     return null;
             }
-            else
+            catch(Exception ex)
+            {
                 return null;
+            }
         }
 
         public Dictionary<string, string> GetRuleSummary()
         {
-            return _ruleManager.GetRules();
+            Dictionary<string, string> dictionary = _ruleManager.GetRules();
+            dictionary = DictionaryReversion.Reverse<string, string>(dictionary);
+            return dictionary;
         }
 
-        public void SetRule(string key, string value)
+        public void SetRule(Rule rule)
         {
-            _ruleManager.SaveRule(key, value);
+            _ruleManager.SaveRule(rule);
         }
 
-        public void DeleteRule(string key)
+        public void DeleteRule(Rule rule)
         {
-            _ruleManager.DeleteRule(key);
+            _ruleManager.DeleteRule(rule);
         }
     }
 }

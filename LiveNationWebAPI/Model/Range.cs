@@ -7,13 +7,8 @@ namespace LiveNationWebAPI.Model
 {
     public class Range
     {
-        private string _start { get; set; }
-        private string _end { get; set; }
-
-        public Range()
-        {
-
-        }
+        private string _start;
+        private string _end;
 
         public Range(string start, string end)
         {

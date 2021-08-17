@@ -7,7 +7,19 @@ namespace LiveNationWebAPI.Model
 {
     public class Response
     {
-        public string _result { get; set; }
-        public Dictionary<string,string> _summary { get; set; }
+        private string _result;
+        private Dictionary<string, string> _summary;
+
+        public string Result
+        {
+            get { return _result; }
+            set { _result = value; }
+        }
+
+        public Dictionary<string, string> Summary
+        {
+            get { return _summary; }
+            set { _summary = value; }
+        }
     }
 }

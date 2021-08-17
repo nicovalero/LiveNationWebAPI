@@ -14,13 +14,14 @@ namespace LiveNationWebAPI.Controllers
         {
             _APIService = service;
         }
+
         [HttpGet("GetRangeResponse")]
         public string GetRangeResponse(string start, string end)
         {
             Range range = new Range(start, end);
             Response response = new Response();
-            response._result = _APIService.CreateRangeResponse(range);
-            response._summary = _APIService.GetRuleSummary();
+            response.Result = _APIService.CreateRangeResponse(range);
+            response.Summary = _APIService.GetRuleSummary();
             string json = JsonConvert.SerializeObject(response);
 
             return json;
@@ -29,13 +30,19 @@ namespace LiveNationWebAPI.Controllers
         [HttpPost("SaveRule")]
         public void SetRule(string key, string value)
         {
-            _APIService.SetRule(key, value);
+            int isNumber;
+            if (int.TryParse(key, out isNumber))
+            {
+                Rule rule = new Rule(key, value);
+                _APIService.SetRule(rule);
+            }
         }
 
         [HttpPost("DeleteRule")]
         public void DeleteRule(string key)
         {
-            _APIService.DeleteRule(key);
+            Rule rule = new Rule(key, null);
+            _APIService.DeleteRule(rule);
         }
     }
 }
