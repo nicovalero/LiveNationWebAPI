@@ -1,6 +1,7 @@
 ﻿using LiveNationWebAPI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace LiveNationWebAPI.Controllers
 {
@@ -19,7 +20,7 @@ namespace LiveNationWebAPI.Controllers
             Range range = new Range(start, end);
             Response response = new Response();
             response._result = _APIService.CreateRangeResponse(range);
-            response._summary = _APIService.GetRules();
+            response._summary = _APIService.GetRuleSummary();
             string json = JsonConvert.SerializeObject(response);
 
             return json;

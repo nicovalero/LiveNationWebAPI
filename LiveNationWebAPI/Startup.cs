@@ -34,6 +34,7 @@ namespace LiveNationWebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LiveNationWebAPI", Version = "v1" });
             });
             services.AddScoped<IAPIService, APIService>();
+            services.AddScoped<IRuleManager, RuleManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

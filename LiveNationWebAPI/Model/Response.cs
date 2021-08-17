@@ -8,6 +8,6 @@ namespace LiveNationWebAPI.Model
     public class Response
     {
         public string _result { get; set; }
-        public List<Rule> _summary { get; set; }
+        public Dictionary<string,string> _summary { get; set; }
     }
 }

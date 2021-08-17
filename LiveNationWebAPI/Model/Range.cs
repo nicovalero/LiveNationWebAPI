@@ -81,5 +81,15 @@ namespace LiveNationWebAPI.Model
                 return false;
             }
         }
+
+        public List<int> GetSequence()
+        {
+            int? startInteger = GetStartAsInt();
+            int? endInteger = GetEndAsInt();
+            if (startInteger != null && endInteger != null)
+                return Enumerable.Range(startInteger.Value, endInteger.Value - startInteger.Value + 1).ToList();
+            else
+                return null;
+        }
     }
 }
