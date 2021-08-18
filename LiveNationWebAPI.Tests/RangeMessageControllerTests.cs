@@ -1,5 +1,6 @@
 ﻿using LiveNationWebAPI.Controllers;
 using LiveNationWebAPI.Tests.fake;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -9,13 +10,15 @@ namespace LiveNationWebAPI.Tests
     public class RangeMessageControllerTests
     {
         private FakeAPIService _fakeAPIService;
+        private MemoryCache _memoryCache;
         private RangeMessageController _underTests;
 
         [TestInitialize]
         public void Setup()
         {
             _fakeAPIService = new FakeAPIService();
-            _underTests = new RangeMessageController(_fakeAPIService);
+            _memoryCache = new MemoryCache(new MemoryCacheOptions());
+            _underTests = new RangeMessageController(_fakeAPIService, _memoryCache);
         }
 
         [TestMethod]

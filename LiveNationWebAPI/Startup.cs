@@ -1,6 +1,7 @@
 using LiveNationWebAPI.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,8 @@ namespace LiveNationWebAPI
             });
             services.AddScoped<IAPIService, APIService>();
             services.AddScoped<IRuleManager, RuleManager>();
+            services.AddScoped<IMemoryCache, MemoryCache>();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
