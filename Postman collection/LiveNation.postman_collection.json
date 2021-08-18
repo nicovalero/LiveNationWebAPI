@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "fb0291c4-7c39-451f-88d3-93187ba76ce8",
+		"name": "LiveNation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Range Response",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44357/RangeMessage/GetRangeResponse?start=1&end=25",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44357",
+					"path": [
+						"RangeMessage",
+						"GetRangeResponse"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "1"
+						},
+						{
+							"key": "end",
+							"value": "25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Rule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44357/RangeMessage/SaveRule?key=10&value=Test",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44357",
+					"path": [
+						"RangeMessage",
+						"SaveRule"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "10"
+						},
+						{
+							"key": "value",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Rule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44357/RangeMessage/DeleteRule?key=10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44357",
+					"path": [
+						"RangeMessage",
+						"DeleteRule"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
