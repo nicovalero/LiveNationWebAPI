@@ -11,7 +11,9 @@ At this point, the user may use **Swagger UI** or a tool like Postman to send th
 
 **Requests:**
       - GetRangeResponse. **Two input values**: start (string) and end (string). **One output**: a json-formatted string.
+      
       - SaveRule. **Two input values**: key (string) and value (string). **One output**: a json-formatted string.
+      
       - DeleteRule. **One input values**: key (string). **One output**: a json-formatted string.
 
 **How to run the tests**
